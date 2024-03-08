@@ -1,6 +1,6 @@
 <template>
-  <div class="q-ma-lg q-pa-md row">
-    <q-card class="my-card">
+  <div class="q-ma-lg q-pa-lg">
+    <q-card class="my-card q-pa-md">
       <q-card-section>
         <div class="text-h6">Input Fields</div>
       </q-card-section>
