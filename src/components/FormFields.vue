@@ -1,5 +1,5 @@
 <template>
-  <div class="q-ma-lg q-pa-md row items-start q-gutter-md">
+  <div class="q-ma-lg q-pa-md row">
     <q-card class="my-card">
       <q-card-section>
         <div class="text-h6">Input Fields</div>

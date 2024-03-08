@@ -1,8 +1,8 @@
 <template>
   <div>
     <q-card
-      class="form-container q-pa-lg q-ma-lg"
-      @drop="dropField"
+      class="form-container q-pa-xl q-ma-lg"
+      @drop="handleDrop"
       @dragover.prevent
     >
       <q-input
@@ -22,15 +22,14 @@
 </template>
 
 <script setup>
-import { defineComponent, computed, ref } from "vue";
-import draggable from "vuedraggable";
-import DraggableFieldVue from "./DraggableField.vue";
+import { computed, defineProps, ref } from "vue";
 
-const props = defineProps(["formFields"]);
+const props = defineProps(["typeFields"]);
+const emits = defineEmits(["drop"]);
 
-const typeFields = ref([]);
+const typeFields = ref(props.typeFields);
 
-function dropField(event) {
+function handleDrop(event) {
   const label = event.dataTransfer.getData("text/plain");
   if (label) {
     typeFields.value.push({ label, value: "", error: "" });

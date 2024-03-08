@@ -32,7 +32,7 @@
         </tbody>
       </q-markup-table>
     </q-card>
-    <div v-if="formattedSelectedCriteria">
+    <div>
       <h4>Generated Schema</h4>
       <pre>{{ formattedSelectedCriteria }}</pre>
     </div>
@@ -59,15 +59,23 @@ function log() {
   console.log(selectedCriteria);
 }
 
-const formattedSelectedCriteria = computed(() => {
-  const schema = {};
-  selectedCriteria.value.forEach((value, index) => {
-    schema[`Row_${index + 1}`] = value;
-  });
-  return schema;
-});
+// const formattedSelectedCriteria = computed(() => {
+//   const schema = {};
+//   selectedCriteria.value.forEach((value, index) => {
+//     schema[`Row_${index + 1}`] = value;
+//   });
+//   return schema;
+// });
 
-watch(selectedCriteria, (index) => {});
+const formattedSelectedCriteria = computed(() => {
+  return criteriaList.value.map((criteria, index) => ({
+    criteria,
+    value:
+      selectedCriteria.value[index] === undefined
+        ? null
+        : selectedCriteria.value[index],
+  }));
+});
 </script>
 
 <style scoped>
