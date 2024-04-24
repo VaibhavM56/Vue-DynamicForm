@@ -12,6 +12,7 @@
         :placeholder="field.label"
         :class="{ 'invalid-input': field.error }"
         v-model="field.value"
+        readonly
       >
         <template v-slot:after>
           <q-btn round dense flat icon="delete" @click="removeField(index)" />
