@@ -21,37 +21,38 @@
         <q-td :props="props">
           <q-td>{{ props.row.name }}</q-td>
           <div v-if="saveButtonClicked === true">
-            <p v-if="!selectedCriteria[props.rowIndex]" class="warning">
-              This is a required question*
+            <p v-if="!selectedCriteria[props.rowIndex].value" class="warning">
+              This field is required*
             </p>
           </div>
         </q-td>
       </template>
       <template v-slot:body-cell-met="props">
         <q-td :props="props">
-          <q-radio v-model="selectedCriteria[props.rowIndex]" val="Met" />
+          <q-radio v-model="selectedCriteria[props.rowIndex].value" val="Met" />
         </q-td>
       </template>
       <template v-slot:body-cell-notmet="props">
         <q-td :props="props">
-          <q-radio v-model="selectedCriteria[props.rowIndex]" val="Not Met" />
+          <q-radio
+            v-model="selectedCriteria[props.rowIndex].value"
+            val="Not Met"
+          />
         </q-td>
       </template>
     </q-table>
     <div>
       <q-btn @click="clickButton">Save</q-btn>
       <h4>Generated Schema</h4>
-      <pre v-for="row in rows" :key="row.id"
-        >{{ row.name }}: {{ selectedCriteria[row.id - 1] }}</pre
-      >
+      <pre v-for="criteria in selectedCriteria" :key="criteria">{{
+        criteria
+      }}</pre>
     </div>
   </q-page>
 </template>
 
 <script setup>
 import { ref } from "vue";
-
-const selectedCriteria = ref([]);
 
 const saveButtonClicked = ref(false);
 
@@ -64,7 +65,7 @@ const columns = [
     name: "criteria",
     required: true,
     label: "",
-    field: (row) => row.name,
+    // field: (row) => row.name,
     align: "left",
   },
   {
@@ -117,6 +118,14 @@ const rows = [
     name: "OVERALL FINAL EVAULATION",
   },
 ];
+
+const selectedCriteria = ref([]);
+rows.forEach((row) => {
+  selectedCriteria.value.push({
+    criteria: row.name,
+    value: "",
+  });
+});
 </script>
 
 <style scoped>
